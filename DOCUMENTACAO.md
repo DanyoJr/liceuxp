@@ -47,7 +47,7 @@ O desenvolvimento ocorreu em duas fases principais:
 3. **Upload para o Gemini**: O backend faz o upload do arquivo para os servidores do Google através do método `ai.files.upload`.
 4. **Processamento**: O backend aguarda (fazendo requisições em *loop* a cada 2 segundos) até que o status do vídeo no Gemini mude de `PROCESSING` para concluído.
 5. **Análise por IA**: Com o vídeo pronto, o backend envia um *prompt* detalhado instruindo o modelo `gemini-3.8-flash` a focar na infração selecionada, exigindo um formato de resposta rígido em JSON contendo:
-   - Decisão (SIM, NAO, INCONCLUSIVO)
+   - Decisão (SIM, NÃO, INCONCLUSIVO)
    - Justificativa
    - Instantes relevantes (timeline em segundos)
    - Limitações da análise (ângulo ruim, baixa resolução, etc).
