@@ -2,8 +2,7 @@
   <div class="var-layout">
     <header class="glass-panel header">
       <div class="logo">
-        <span class="icon">⚽</span>
-        <h1>LiceuVAR</h1>
+        <h1>LiceuXP</h1>
       </div>
       <div class="status-indicator">
         <span class="pulse" :class="connectionStatus"></span>
@@ -64,8 +63,8 @@
         </div>
 
         <div v-if="result" class="result-card">
-          <div class="decision-badge" :class="'decision-' + (resultData?.decisao?.toLowerCase() || 'inconclusivo')">
-            {{ resultData?.decisao || 'N/A' }}
+          <div class="decision-badge" :class="'decision-' + (resultData?.decisão?.toLowerCase() || 'inconclusivo')">
+            {{ resultData?.decisão || 'N/A' }}
           </div>
           
           <div class="result-group">
@@ -80,15 +79,15 @@
             </div>
           </div>
 
-          <div class="result-group" v-if="resultData?.limitacoes?.length">
+          <div class="result-group" v-if="resultData?.limitações?.length">
             <h4>Limitações Visuais da Avaliação</h4>
             <ul class="limitations-list">
-              <li v-for="(lim, index) in resultData.limitacoes" :key="index">{{ lim }}</li>
+              <li v-for="(lim, index) in resultData.limitações" :key="index">{{ lim }}</li>
             </ul>
           </div>
           
           <div class="disclaimer">
-            <small>{{ result.observacao_geral || 'Análise experimental; não substitui a decisão humana.' }}</small>
+            <small>{{ result.observação_geral || 'Análise experimental; não substitui a decisão humana.' }}</small>
           </div>
         </div>
       </section>
@@ -111,7 +110,7 @@ const result = ref<any>(null);
 const categories = [
   { label: 'Impedimento', value: 'impedimento' },
   { label: 'Falta Física', value: 'falta' },
-  { label: 'Mão na Bola', value: 'mao_na_bola' }
+  { label: 'Mão na Bola', value: 'mão_na_bola' }
 ];
 
 const connectionStatus = ref('online');
@@ -189,15 +188,15 @@ async function startAnalysis() {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  padding: 16px;
-  gap: 16px;
+  padding: 32px;
+  gap: 32px;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 24px;
+  padding: 24px 48px;
 }
 
 .logo {
@@ -207,11 +206,11 @@ async function startAnalysis() {
 }
 
 .logo .icon {
-  font-size: 24px;
+  font-size: 48px;
 }
 
 .logo h1 {
-  font-size: 24px;
+  font-size: 48px;
   letter-spacing: 1px;
   background: linear-gradient(90deg, var(--text-main), var(--brand-cyan));
   -webkit-background-clip: text;
@@ -222,13 +221,13 @@ async function startAnalysis() {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 14px;
+  font-size: 24px;
   color: var(--text-muted);
 }
 
 .pulse {
-  width: 10px;
-  height: 10px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   background-color: var(--status-no);
   box-shadow: 0 0 10px var(--status-no);
@@ -244,7 +243,7 @@ async function startAnalysis() {
 .main-content {
   display: flex;
   flex: 1;
-  gap: 16px;
+  gap: 32px;
   min-height: 0;
 }
 
@@ -252,13 +251,13 @@ async function startAnalysis() {
   flex: 3;
   display: flex;
   flex-direction: column;
-  padding: 16px;
-  gap: 16px;
+  padding: 24px;
+  gap: 24px;
 }
 
 .result-section {
   flex: 2;
-  padding: 24px;
+  padding: 32px;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
@@ -301,12 +300,12 @@ async function startAnalysis() {
 }
 
 .upload-icon {
-  font-size: 48px;
-  margin-bottom: 16px;
+  font-size: 96px;
+  margin-bottom: 24px;
 }
 
 .upload-hint {
-  font-size: 12px;
+  font-size: 18px;
   color: var(--text-muted);
   margin-top: 8px;
 }
@@ -322,7 +321,7 @@ async function startAnalysis() {
 }
 
 .controls-panel h3 {
-  font-size: 14px;
+  font-size: 20px;
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -337,10 +336,11 @@ async function startAnalysis() {
   flex: 1;
   background: rgba(255,255,255,0.05);
   color: var(--text-main);
-  padding: 12px;
-  border-radius: 8px;
+  padding: 24px;
+  border-radius: 12px;
   border: 1px solid var(--border-color);
   font-weight: 600;
+  font-size: 20px;
 }
 
 .btn-category:hover:not(:disabled) {
@@ -360,11 +360,11 @@ async function startAnalysis() {
 
 .btn-analyze {
   margin-top: 8px;
-  padding: 16px;
-  border-radius: 8px;
+  padding: 32px;
+  border-radius: 12px;
   background: linear-gradient(135deg, var(--brand-blue), var(--brand-cyan));
   color: white;
-  font-size: 16px;
+  font-size: 24px;
   font-weight: 800;
   letter-spacing: 1px;
   box-shadow: 0 4px 20px rgba(6, 182, 212, 0.3);
@@ -380,9 +380,9 @@ async function startAnalysis() {
 .btn-reset {
   background: transparent;
   color: var(--text-muted);
-  padding: 8px;
+  padding: 16px;
   text-decoration: underline;
-  font-size: 12px;
+  font-size: 20px;
 }
 
 .btn-reset:hover {
@@ -396,7 +396,7 @@ async function startAnalysis() {
   justify-content: center;
   color: var(--text-muted);
   text-align: center;
-  font-style: italic;
+  font-size: 24px;
 }
 
 .analyzing-state {
@@ -446,11 +446,11 @@ async function startAnalysis() {
 }
 
 .decision-badge {
-  padding: 16px;
+  padding: 24px;
   text-align: center;
-  font-size: 24px;
+  font-size: 36px;
   font-weight: 800;
-  border-radius: 8px;
+  border-radius: 12px;
   text-transform: uppercase;
   letter-spacing: 2px;
 }
@@ -461,7 +461,7 @@ async function startAnalysis() {
   border: 1px solid var(--status-yes);
 }
 
-.decision-nao {
+.decision-não {
   background-color: rgba(34, 197, 94, 0.2);
   color: #86efac;
   border: 1px solid var(--status-no);
@@ -476,14 +476,14 @@ async function startAnalysis() {
 .result-group h4 {
   color: var(--brand-cyan);
   margin-bottom: 8px;
-  font-size: 14px;
+  font-size: 20px;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 .result-group p {
   line-height: 1.6;
-  font-size: 15px;
+  font-size: 20px;
 }
 
 .tags {
@@ -494,16 +494,16 @@ async function startAnalysis() {
 
 .tag {
   background: rgba(255,255,255,0.1);
-  padding: 4px 12px;
+  padding: 8px 16px;
   border-radius: 20px;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 600;
 }
 
 .limitations-list {
   padding-left: 20px;
   color: #cbd5e1;
-  font-size: 14px;
+  font-size: 20px;
   line-height: 1.5;
 }
 

@@ -27,8 +27,8 @@ app.post('/api/analyze', upload.single('video'), async (req, res) => {
         }
 
         const category = req.body.category;
-        if (!category || !['impedimento', 'falta', 'mao_na_bola'].includes(category)) {
-            return res.status(400).json({ error: 'Categoria inválida. Escolha: impedimento, falta ou mao_na_bola.' });
+        if (!category || !['impedimento', 'falta', 'mão_na_bola'].includes(category)) {
+            return res.status(400).json({ error: 'Categoria inválida. Escolha: impedimento, falta ou mão_na_bola.' });
         }
 
         console.log(`[Backend] Recebido vídeo de ${req.file.size} bytes para análise de: ${category}`);
@@ -60,20 +60,20 @@ app.post('/api/analyze', upload.single('video'), async (req, res) => {
 Analise este lance de futebol focando EXCLUSIVAMENTE na seguinte infração: ${category.toUpperCase()}.
 
 Para a categoria solicitada, forneça:
-- decisao: "SIM" (ocorreu), "NAO" (não ocorreu) ou "INCONCLUSIVO" (não é possível determinar)
+- decisão: "SIM" (ocorreu), "NÃO" (não ocorreu) ou "INCONCLUSIVO" (não é possível determinar)
 - justificativa: sua explicação baseada em evidências observáveis do vídeo.
 - instantes_relevantes: array de strings com os momentos em segundos (ex: ["00:04-00:06"]) ou [] se não aplicável.
-- limitacoes: array de problemas que impedem uma decisão certa (ângulo, resolução, etc).
+- limitações: array de problemas que impedem uma decisão certa (ângulo, resolução, etc).
 
 Retorne estritamente um JSON no seguinte formato:
 {
   "${category}": {
-    "decisao": "...",
+    "decisão": "...",
     "justificativa": "...",
     "instantes_relevantes": [],
-    "limitacoes": []
+    "limitações": []
   },
-  "observacao_geral": "Análise experimental; não substitui a arbitragem humana."
+  "observação_geral": "Análise experimental; não substitui a arbitragem humana."
 }`;
 
         // 3. Chamada da API

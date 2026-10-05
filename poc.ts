@@ -43,22 +43,22 @@ async function analisarVideo() {
 Analise este lance de futebol e devolva sua avaliação estruturada.
 Avalie três categorias: impedimento, falta e mão na bola.
 Para cada uma, forneça:
-- decisao: "SIM", "NAO" ou "INCONCLUSIVO"
+- decisão: "SIM", "NÃO" ou "INCONCLUSIVO"
 - justificativa: sua explicação baseada em evidências observáveis
 - instantes_relevantes: array com os instantes aproximados de tempo em segundos, ex: ["00:04-00:06"] ou []
-- limitacoes: array de problemas que impedem uma decisão certa (ângulo, resolução, etc)
+- limitações: array de problemas que impedem uma decisão certa (ângulo, resolução, etc)
 
 Retorne estritamente um JSON no seguinte formato:
 {
   "impedimento": {
-    "decisao": "...",
+    "decisão": "...",
     "justificativa": "...",
     "instantes_relevantes": [],
-    "limitacoes": []
+    "limitações": []
   },
   "falta": { ... },
-  "mao_na_bola": { ... },
-  "observacao_geral": "Análise experimental; não substitui a arbitragem humana."
+  "mão_na_bola": { ... },
+  "observação_geral": "Análise experimental; não substitui a arbitragem humana."
 }`;
 
         const response = await ai.models.generateContent({

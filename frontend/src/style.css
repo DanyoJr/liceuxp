@@ -32,6 +32,9 @@ body {
   min-height: 100vh;
   display: flex;
   overflow: hidden; /* App estilo kiosk */
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-x pan-y;
 }
 
 #app {
