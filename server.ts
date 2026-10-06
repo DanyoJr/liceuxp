@@ -5,6 +5,7 @@ import { GoogleGenAI } from '@google/genai';
 import * as dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
+import os from 'os';
 
 dotenv.config();
 
@@ -15,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 // Configuração do Multer para salvar os uploads temporariamente
-const upload = multer({ dest: 'uploads/' });
+const upload = multer({ dest: os.tmpdir() });
 
 // Instância do Gemini
 const ai = new GoogleGenAI({});
