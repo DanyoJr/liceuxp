@@ -1,5 +1,10 @@
 <template>
   <div class="var-layout">
+    <div v-if="toastMessage" class="toast-container">
+      <div class="toast">
+        {{ toastMessage }}
+      </div>
+    </div>
     <header class="glass-panel header">
       <div class="logo">
         <h1>LiceuXP</h1>
@@ -106,6 +111,7 @@ const videoUrl = ref<string>('');
 const selectedCategory = ref<string>('');
 const isAnalyzing = ref<boolean>(false);
 const result = ref<any>(null);
+const toastMessage = ref<string>('');
 
 const categories = [
   { label: 'Impedimento', value: 'impedimento' },
@@ -170,13 +176,23 @@ async function startAnalysis() {
     const data = await response.json();
     
     if (!response.ok) {
+      if (response.status === 503) {
+        throw new Error('SERVER_FULL');
+      }
       throw new Error(data.error || 'Erro no servidor');
     }
     
     result.value = data;
     
   } catch (err: any) {
-    alert(`Atenção: ${err.message}`);
+    if (err.message === 'SERVER_FULL' || err.message.includes('lotados')) {
+      toastMessage.value = 'Não foi possível seguir porque os servidores estão lotados. Tente novamente mais tarde.';
+      setTimeout(() => {
+        toastMessage.value = '';
+      }, 5000);
+    } else {
+      alert(`Atenção: ${err.message}`);
+    }
   } finally {
     isAnalyzing.value = false;
   }
@@ -184,6 +200,37 @@ async function startAnalysis() {
 </script>
 
 <style scoped>
+.toast-container {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.toast {
+  background-color: rgba(239, 68, 68, 0.95);
+  color: white;
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 18px;
+  box-shadow: 0 8px 32px rgba(239, 68, 68, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: slide-down 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: center;
+  max-width: 90vw;
+}
+
+@keyframes slide-down {
+  from { opacity: 0; transform: translateY(-40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .var-layout {
   display: flex;
   flex-direction: column;
